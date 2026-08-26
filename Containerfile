@@ -30,7 +30,7 @@ RUN apt-get update \
             build-essential python3-pip \
             tree file patch rsync openssh-client \
             dnsutils procps  \
-            ripgrep fd-find shellcheck sqlite3 htop ncdu batcat delta \
+            ripgrep fd-find shellcheck sqlite3 htop ncdu bat git-delta \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* \
  && npm install -g --ignore-scripts --min-release-age=0 @earendil-works/pi-coding-agent
