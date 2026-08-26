@@ -1,0 +1,12 @@
+{
+  "name": "pi-agent-extensions",
+  "private": true,
+  "description": "Local dependencies for pi coding agent extensions (see https://pi.dev/docs/latest/extensions).",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "dependencies": {
+    "@earendil-works/pi-coding-agent": "^0.84.3",
+    "typebox": "^1.3.7"
+  }
+}

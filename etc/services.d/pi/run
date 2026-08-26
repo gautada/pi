@@ -1,0 +1,7 @@
+#!/bin/sh
+
+SLICE_USER=$(id -nu 1001)
+HOME="/home/${SLICE_USER}"
+export HOME
+exec s6-setuidgid "${SLICE_USER}" /usr/bin/tmux \
+        new-session -d -s pi "cd /home/${SLICE_USER} && /usr/bin/pi"
