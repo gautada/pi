@@ -22,6 +22,7 @@ LABEL org.opencontainers.image.license="Liscense"
 # ╭――――――――――――――――――╮
 # │ PACKAGES         │
 # ╰――――――――――――――――――╯
+# hadolint ignore=DL3016
 RUN npm install -g --ignore-scripts --min-release-age=0 @earendil-works/pi-coding-agent
 
 # ╭――――――――――――――――――――╮
