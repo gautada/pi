@@ -29,9 +29,8 @@ RUN apt-get update \
             git less ca-certificates jq wget unzip zip xz-utils bzip2 \
             build-essential python3-pip \
             tree file patch rsync openssh-client \
-            dnsutils procps \
-            ripgrep fd-find shellcheck sqlite3 htop ncdu git-delta \
-
+            dnsutils procps  \
+            ripgrep fd-find shellcheck sqlite3 htop ncdu batcat delta \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* \
  && npm install -g --ignore-scripts --min-release-age=0 @earendil-works/pi-coding-agent
