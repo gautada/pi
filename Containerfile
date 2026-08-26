@@ -65,9 +65,9 @@ RUN ln -fsv /mnt/volumes/data/auth.json . \
  && ln -fsv /mnt/volumes/data/settings.json . \
  && ln -fsv /mnt/volumes/data/skills . 
 WORKDIR /home/${USER}
-RUN ln -fsv /mnt/volumes/data/files .
+RUN ln -fsv /mnt/volumes/data/Workspace . \
+    ln -fsv /mnt/volumes/data/tmux.conf .tmux.conf
 WORKDIR /
-COPY home/slice/_tmux.conf /home/#{USER}/.tmux.conf
 RUN chown ${USER}:${USER} -R /home/${USER}
 
 # tmux config
