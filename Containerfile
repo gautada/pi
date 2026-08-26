@@ -25,7 +25,13 @@ LABEL org.opencontainers.image.license="Liscense"
 # hadolint ignore=DL3016
 RUN apt-get update \
  && apt-get upgrade --yes \
- && apt-get install -y --no-install-recommends tmux ripgrep fd-find \
+ && apt-get install -y --no-install-recommends tmux \
+            git less ca-certificates jq wget unzip zip xz-utils bzip2 \
+            build-essential python3-pip \
+            tree file patch rsync openssh-client \
+            dnsutils procps \
+            ripgrep fd-find shellcheck sqlite3 htop ncdu git-delta \
+
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* \
  && npm install -g --ignore-scripts --min-release-age=0 @earendil-works/pi-coding-agent
