@@ -7,6 +7,10 @@
 # Desktop Services Store - Custom view preferences
 .DS_Store
 
+# Node.js dependencies installed for pi agent extensions (see
+# home/slice/_pi/agent/extensions/package.json)
+node_modules/
+
 # **Volume Folders** are used in development to set runtime data, usuaully 
 # this is private data and should almost **NEVER** be loaded into version
 # control

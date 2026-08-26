@@ -31,7 +31,7 @@ export default function (pi: ExtensionAPI) {
         }),
       ),
     }),
-    async execute(_toolCallId, params, signal, _onUpdate, _ctx) {
+    async execute(_toolCallId, params, signal) {
       const apiKey = process.env.TAVILY_API_KEY;
       if (!apiKey) {
         return {
