@@ -3,7 +3,7 @@
   "private": true,
   "description": "Local dependencies for pi coding agent extensions (see https://pi.dev/docs/latest/extensions).",
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=22.0.0"
   },
   "dependencies": {
     "@earendil-works/pi-coding-agent": "^0.84.3",

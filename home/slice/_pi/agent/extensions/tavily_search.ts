@@ -1,4 +1,6 @@
+// eslint-disable-next-line n/no-missing-import -- resolved at runtime by pi's extension loader (jiti) via this directory's package.json; not installed by the CI linter
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
+// eslint-disable-next-line n/no-missing-import -- see note above
 import { Type } from "typebox";
 
 const TAVILY_ENDPOINT = "https://api.tavily.com/search";
