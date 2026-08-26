@@ -28,7 +28,7 @@ jobs:
           HEAD_REF: ${{ github.head_ref }}
         run: |
           if [[ "${HEAD_REF}" != "dev" ]]; then
-            echo "::error::Direct PRs into main are not allowed - merge into dev first, then promote dev to main."
+            echo "::error::Direct PRs into main are not allowed - promote from dev"
             exit 1
           fi
 
