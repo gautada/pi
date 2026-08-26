@@ -12,8 +12,10 @@ RUN apt-get update \
 
 
 FROM npm
+# hadolint ignore=DL3016
+RUN npm install -g --ignore-scripts --min-release-age=0 @earendil-works/pi-coding-agent
 
-RUN which npm
+
 # RUN curl -fsSL https://pi.dev/install.sh | sh
 
 
