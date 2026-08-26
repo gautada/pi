@@ -22,13 +22,18 @@ LABEL org.opencontainers.image.license="Liscense"
 # ╭――――――――――――――――――╮
 # │ PACKAGES         │
 # ╰――――――――――――――――――╯
+RUN apt-get update \
+ && apt-get upgrade --yes \
+ && apt-get install -y --no-install-recommends tmux ripgrep fd-find \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/* \
 # hadolint ignore=DL3016
 RUN npm install -g --ignore-scripts --min-release-age=0 @earendil-works/pi-coding-agent
 
 # ╭――――――――――――――――――――╮
 # │ USER               │
 # ╰――――――――――――――――――――╯
-# Rename the base debian user to container based user.
+# Rename the base user to this container user.
 # Follows the same pattern as other gautada containers.
 ARG USER=slice
 RUN /usr/sbin/usermod -l $USER ryan \
@@ -37,4 +42,13 @@ RUN /usr/sbin/usermod -l $USER ryan \
  && PASSWORD="$(openssl rand -base64 32 | tr -dc 'A-Za-z0-9' | head -c 24)" \
  && printf '%s:%s\n' "$USER" "$PASSWORD" | /usr/sbin/chpasswd
 
+# ╭――――――――――――――――――――╮
+# │ SERVICE            │
+# ╰――――――――――――――――――――╯
+COPY etc/services.d/pi/run /etc/services.d/pi/run
+RUN chmod +x /etc/services.d/pi/run
+#  && SLICE_USER=${USER} | envsubst /etc/services.d/pi/run
+
+
+# tmux config
 
