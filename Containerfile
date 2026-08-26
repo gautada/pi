@@ -33,7 +33,8 @@ RUN apt-get update \
             ripgrep fd-find shellcheck sqlite3 htop ncdu bat git-delta \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* \
- && npm install -g --ignore-scripts --min-release-age=0 @earendil-works/pi-coding-agent
+ && npm install -g --ignore-scripts --min-release-age=0 \
+    @earendil-works/pi-coding-agent pi-web-ui
 
 # ╭――――――――――――――――――――╮
 # │ USER               │
@@ -51,8 +52,8 @@ RUN /usr/sbin/usermod -l $USER ryan \
 # │ SERVICE            │
 # ╰――――――――――――――――――――╯
 COPY etc/services.d/pi/run /etc/services.d/pi/run
-RUN chmod +x /etc/services.d/pi/run
-#  && SLICE_USER=${USER} | envsubst /etc/services.d/pi/run
+COPY etc/services.d/pi-web-ui/run /etc/services.d/pi-web-ui/run
+RUN chmod +x /etc/services.d/pi/run /etc/services.d/pi-web-ui/run
 
 # ╭――――――――――――――――――――╮
 # │ CONFIG             │
