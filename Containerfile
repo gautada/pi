@@ -49,14 +49,20 @@ COPY etc/services.d/pi/run /etc/services.d/pi/run
 RUN chmod +x /etc/services.d/pi/run
 #  && SLICE_USER=${USER} | envsubst /etc/services.d/pi/run
 
+# ╭――――――――――――――――――――╮
+# │ CONFIG             │
+# ╰――――――――――――――――――――╯
 WORKDIR /home/${USER}/.pi/agent
 RUN ln -fsv /mnt/volumes/data/auth.json . \
  && ln -fsv /mnt/volumes/data/extensions . \
  && ln -fsv /mnt/volumes/data/models-store.json . \
  && ln -fsv /mnt/volumes/data/sessions . \
  && ln -fsv /mnt/volumes/data/settings.json . \
- && ln -fsv /mnt/volumes/data/skills .
+ && ln -fsv /mnt/volumes/data/skills . 
+WORKDIR /home/${USER}
+RUN ln -fsv /mnt/volumes/data/files .
 WORKDIR /
+COPY home/slice/_tmux.conf /home/#{USER}/.tmux.conf
 RUN chown ${USER}:${USER} -R /home/${USER}
 
 # tmux config
