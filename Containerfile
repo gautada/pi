@@ -63,7 +63,8 @@ RUN ln -fsv /mnt/volumes/data/auth.json . \
  && ln -fsv /mnt/volumes/data/models-store.json . \
  && ln -fsv /mnt/volumes/data/sessions . \
  && ln -fsv /mnt/volumes/data/settings.json . \
- && ln -fsv /mnt/volumes/data/skills . 
+ && ln -fsv /mnt/volumes/data/skills . \
+ && ln -fsv /mnt/volumes/data/AGENTS.md . 
 WORKDIR /home/${USER}
 RUN ln -fsv /mnt/volumes/data/Workspace . \
  && ln -fsv /mnt/volumes/data/tmux.conf .tmux.conf
