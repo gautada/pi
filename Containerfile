@@ -54,7 +54,8 @@ RUN ln -fsv /mnt/volumes/data/auth.json . \
  && ln -fsv /mnt/volumes/data/extensions . \
  && ln -fsv /mnt/volumes/data/models-store.json . \
  && ln -fsv /mnt/volumes/data/sessions . \
- && ln -fsv /mnt/volumes/data/settings.json .
+ && ln -fsv /mnt/volumes/data/settings.json . \
+ && ln -fsv /mnt/volumes/data/skills .
 WORKDIR /
 RUN chown ${USER}:${USER} -R /home/${USER}
 
