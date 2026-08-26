@@ -22,13 +22,13 @@ LABEL org.opencontainers.image.license="Liscense"
 # ╭――――――――――――――――――╮
 # │ PACKAGES         │
 # ╰――――――――――――――――――╯
+# hadolint ignore=DL3016
 RUN apt-get update \
  && apt-get upgrade --yes \
  && apt-get install -y --no-install-recommends tmux ripgrep fd-find \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* \
-# hadolint ignore=DL3016
-RUN npm install -g --ignore-scripts --min-release-age=0 @earendil-works/pi-coding-agent
+ && npm install -g --ignore-scripts --min-release-age=0 @earendil-works/pi-coding-agent
 
 # ╭――――――――――――――――――――╮
 # │ USER               │
