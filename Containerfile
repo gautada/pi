@@ -31,9 +31,9 @@ RUN apt-get update \
  && npm install -g --ignore-scripts --min-release-age=0 \
     @earendil-works/pi-coding-agent \
  && npm install -g --min-release-age=0 pi-web-ui
-WORKDIR /usr/lib/node_modules/pi-web-ui/node_modules/node-pty
-RUN PATH="/usr/lib/node_modules/npm/bin/node-gyp-bin:$PATH" node-gyp rebuild
-WORKDIR /
+# WORKDIR /usr/lib/node_modules/pi-web-ui/node_modules/node-pty
+# RUN PATH="/usr/lib/node_modules/npm/bin/node-gyp-bin:$PATH" node-gyp rebuild
+# WORKDIR /
 
 # ╭――――――――――――――――――――╮
 # │ USER               │
