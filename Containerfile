@@ -28,7 +28,7 @@ RUN apt-get update \
  && apt-get install -y --no-install-recommends tmux \
             git less ca-certificates jq wget unzip zip xz-utils bzip2 \
             build-essential python3-pip \
-            tree file patch rsync openssh-client \
+            tree file patch rsync \
             dnsutils procps  \
             ripgrep fd-find shellcheck sqlite3 htop ncdu bat git-delta \
  && apt-get clean \
