@@ -1,4 +1,4 @@
-FROM docker.io/gautada/node:dev
+FROM docker.io/gautada/node:22.23.2
 
 # ╭――――――――――――――――――╮
 # │ METADATA         │
