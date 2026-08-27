@@ -40,6 +40,11 @@ RUN apt-get update \
 # ╭――――――――――――――――――――╮
 # │ USER               │
 # ╰――――――――――――――――――――╯
+COPY usr/bin/container-version /usr/bin/container-version
+
+# ╭――――――――――――――――――――╮
+# │ USER               │
+# ╰――――――――――――――――――――╯
 # Rename the base user to this container user.
 # Follows the same pattern as other gautada containers.
 ARG USER=slice
