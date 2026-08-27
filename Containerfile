@@ -25,16 +25,15 @@ LABEL org.opencontainers.image.license="Liscense"
 # hadolint ignore=DL3016
 RUN apt-get update \
  && apt-get upgrade --yes \
- && apt-get install -y --no-install-recommends tmux \
-            git less ca-certificates jq wget unzip zip xz-utils bzip2 \
-            build-essential python3-pip \
-            tree file patch rsync openssh-client \
-            dnsutils procps  \
-            ripgrep fd-find shellcheck sqlite3 htop ncdu bat git-delta \
+ && apt-get install -y --no-install-recommends tmux ripgrep fd-find \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* \
  && npm install -g --ignore-scripts --min-release-age=0 \
-    @earendil-works/pi-coding-agent pi-web-ui
+    @earendil-works/pi-coding-agent \
+ && npm install -g --min-release-age=0 pi-web-ui
+WORKDIR /usr/lib/node_modules/pi-web-ui/node_modules/node-pty
+RUN PATH="/usr/lib/node_modules/npm/bin/node-gyp-bin:$PATH" node-gyp rebuild
+WORKDIR /
 
 # ╭――――――――――――――――――――╮
 # │ USER               │
@@ -54,21 +53,14 @@ RUN /usr/sbin/usermod -l $USER ryan \
 COPY etc/services.d/pi/run /etc/services.d/pi/run
 COPY etc/services.d/pi-web-ui/run /etc/services.d/pi-web-ui/run
 RUN chmod +x /etc/services.d/pi/run /etc/services.d/pi-web-ui/run
+#  && SLICE_USER=${USER} | envsubst /etc/services.d/pi/run
 
-# ╭――――――――――――――――――――╮
-# │ CONFIG             │
-# ╰――――――――――――――――――――╯
 WORKDIR /home/${USER}/.pi/agent
 RUN ln -fsv /mnt/volumes/data/auth.json . \
  && ln -fsv /mnt/volumes/data/extensions . \
  && ln -fsv /mnt/volumes/data/models-store.json . \
  && ln -fsv /mnt/volumes/data/sessions . \
- && ln -fsv /mnt/volumes/data/settings.json . \
- && ln -fsv /mnt/volumes/data/skills . \
- && ln -fsv /mnt/volumes/data/AGENTS.md . 
-WORKDIR /home/${USER}
-RUN ln -fsv /mnt/volumes/data/Workspace . \
- && ln -fsv /mnt/volumes/data/tmux.conf .tmux.conf
+ && ln -fsv /mnt/volumes/data/settings.json .
 WORKDIR /
 RUN chown ${USER}:${USER} -R /home/${USER}
 

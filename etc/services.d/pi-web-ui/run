@@ -4,4 +4,4 @@ SLICE_USER=$(id -nu 1001)
 HOME="/home/${SLICE_USER}"
 export HOME
 exec s6-setuidgid "${SLICE_USER}" \
-	/usr/bin/pi-web-ui --port 8787 --cwd "/home/${SLICE_USER}"
+	/usr/bin/pi-web-ui --port 8080 --cwd "/home/${SLICE_USER}"
