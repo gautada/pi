@@ -46,7 +46,7 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/* \
  && npm install -g --ignore-scripts --min-release-age=0 \
     @earendil-works/pi-coding-agent \
- && npm install -g --min-release-age=0 \
+ && npm install -g --min-release-age=0  pi-web-ui \
  && npm install -g --min-release-age=0 pi-slack-bridge
 
 
