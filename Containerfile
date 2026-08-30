@@ -22,6 +22,17 @@ LABEL org.opencontainers.image.license="Liscense"
 # ╭――――――――――――――――――╮
 # │ PACKAGES         │
 # ╰――――――――――――――――――╯
+# --min-release-age=0 tells npm: “don’t require a package version to have been
+# published for any minimum amount of time.”
+# Why use it: if your npm config enforces a delay like 1–7 days before newly
+# published packages can be installed, 0 overrides that and lets you install
+# the newest release immediately.
+# Why not use it: that delay is a supply-chain safety feature. Waiting before
+# accepting brand-new releases gives the ecosystem time to catch malicious or
+# compromised packages.
+# So: use it only if an existing release-age policy is blocking a package you
+# intentionally need right now. Otherwise leave it off.
+#
 # hadolint ignore=DL3016
 RUN apt-get update \
  && apt-get upgrade --yes \
@@ -35,7 +46,9 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/* \
  && npm install -g --ignore-scripts --min-release-age=0 \
     @earendil-works/pi-coding-agent \
- && npm install -g --min-release-age=0 pi-web-ui
+ && npm install -g --min-release-age=0 \
+ && npm install -g --min-release-age=0 pi-slack-bridge
+
 
 # ╭――――――――――――――――――――╮
 # │ USER               │
