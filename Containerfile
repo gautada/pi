@@ -49,7 +49,6 @@ RUN apt-get update \
  && npm install -g --min-release-age=0  pi-web-ui \
  && npm install -g --min-release-age=0 pi-slack-bridge
 
-
 # ╭――――――――――――――――――――╮
 # │ USER               │
 # ╰――――――――――――――――――――╯
@@ -60,10 +59,11 @@ COPY usr/bin/container-version /usr/bin/container-version
 # ╰――――――――――――――――――――╯
 # Rename the base user to this container user.
 # Follows the same pattern as other gautada containers.
+ARG OLDUSER=ryan
 ARG USER=slice
-RUN /usr/sbin/usermod -l $USER ryan \
+RUN /usr/sbin/usermod -l $USER $OLDUSER \
  && /usr/sbin/usermod -d /home/$USER -m $USER \
- && /usr/sbin/groupmod -n $USER ryan \
+ && /usr/sbin/groupmod -n $USER $OLDUSER \
  && PASSWORD="$(openssl rand -base64 32 | tr -dc 'A-Za-z0-9' | head -c 24)" \
  && printf '%s:%s\n' "$USER" "$PASSWORD" | /usr/sbin/chpasswd
 
