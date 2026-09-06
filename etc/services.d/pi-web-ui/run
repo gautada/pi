@@ -1,6 +1,6 @@
 #!/bin/sh
 
-SLICE_USER=$(id -nu 1001)
+SLICE_USER=$(id -nu 1000)
 HOME="/home/${SLICE_USER}"
 export HOME
 exec s6-setuidgid "${SLICE_USER}" \
