@@ -22,29 +22,32 @@ SLICE_USER=$(id -nu 1000)
 HOME="/home/${SLICE_USER}"
 export HOME
 
-# Case-insensitive compare of PI_TYPE.
-_pt=$(printf '%s' "${PI_TYPE:-}" | tr '[:upper:]' '[:lower:]')
-
-if [ "$_pt" = "web" ]; then
-    # ---- Web surface: pi-web-ui multi-conversation UI ----
-    exec s6-setuidgid "${SLICE_USER}" \
-        /usr/bin/pi-web-ui --port 8080 --cwd "${HOME}"
-fi
-
-# ---- Default: tmux + plain pi (single, bridge-native session) ----
-# s6 supervises THIS run script. tmux new-session -d returns immediately, so we
-# keep the script in the foreground by blocking until the session dies; when pi
-# exits (crash or /exit) the loop ends non-zero and s6 restarts us -> respawns pi.
-# The session is attachable from the host with:  tmux attach -t ren
-exec s6-setuidgid "${SLICE_USER}" /bin/sh -c "
-    SESSION='ren'
-    # Kill any stale session/server from a previous run so we never double-launch.
-    tmux kill-session -t ${SESSION} 2>/dev/null || true
-    # Start the single pi session detached inside tmux, rooted at ${HOME}.
-    tmux new-session -d -s ${SESSION} -c '${HOME} exec pi'
-    # Supervise: block while the session lives; exit non-zero when it ends.
-    while tmux has-session -t ${SESSION} 2>/dev/null; do
-        sleep 5
-    done
-    exit 1
-  "
+# # Case-insensitive compare of PI_TYPE.
+# _pt=$(printf '%s' "${PI_TYPE:-}" | tr '[:upper:]' '[:lower:]')
+#
+# if [ "$_pt" = "web" ]; then
+#     # ---- Web surface: pi-web-ui multi-conversation UI ----
+#     exec s6-setuidgid "${SLICE_USER}" \
+#         /usr/bin/pi-web-ui --port 8080 --cwd "${HOME}"
+# fi
+#
+# # ---- Default: tmux + plain pi (single, bridge-native session) ----
+# # s6 supervises THIS run script. tmux new-session -d returns immediately, so we
+# # keep the script in the foreground by blocking until the session dies; when pi
+# # exits (crash or /exit) the loop ends non-zero and s6 restarts us -> respawns pi.
+# # The session is attachable from the host with:  tmux attach -t ren
+# exec s6-setuidgid "${SLICE_USER}" /bin/sh -c "
+#     SESSION='ren'
+#     # Kill any stale session/server from a previous run so we never double-launch.
+#     tmux kill-session -t ${SESSION} 2>/dev/null || true
+#     # Start the single pi session detached inside tmux, rooted at ${HOME}.
+#     tmux new-session -d -s ${SESSION} -c '${HOME} exec pi'
+#     # Supervise: block while the session lives; exit non-zero when it ends.
+#     while tmux has-session -t ${SESSION} 2>/dev/null; do
+#         sleep 5
+#     done
+#     exit 1
+# "
+ exec s6-setuidgid "${SLICE_USER}" \
+   /usr/bin/tmux new-session -d -s "${SLICE_USER}" -c "${HOME}" /usr/bin/pi
+# /usr/bin/sleep infinity
