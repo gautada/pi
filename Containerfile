@@ -71,10 +71,10 @@ RUN /usr/sbin/usermod -l $USER $OLDUSER \
 # ╭――――――――――――――――――――╮
 # │ SERVICE            │
 # ╰――――――――――――――――――――╯
-# COPY etc/services.d/pi/run /etc/services.d/pi/run
-COPY etc/services.d/pi-web-ui/run /etc/services.d/pi-web-ui/run
-RUN chmod +x /etc/services.d/pi-web-ui/run 
-# /etc/services.d/pi/run
+COPY etc/services.d/pi/run /etc/services.d/pi/run
+# COPY etc/services.d/pi-web-ui/run /etc/services.d/pi-web-ui/run
+RUN chmod +x /etc/services.d/pi/run 
+#/etc/services.d/pi-web-ui/run
 
 # ╭――――――――――――――――――――╮
 # │ CONFIG             │
