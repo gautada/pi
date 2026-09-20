@@ -90,8 +90,7 @@ RUN ln -fsv /mnt/volumes/data/auth.json . \
 WORKDIR /home/${USER}
 RUN ln -fsv /mnt/volumes/data/Workspace . \
  && ln -fsv /mnt/volumes/data/tmux.conf .tmux.conf
+WORKDIR /home/${USER}/.ssh
+RUN ln -fsv /mnt/volumes/data/.ssh/known_hosts .
 WORKDIR /
 RUN chown ${USER}:${USER} -R /home/${USER}
-
-# tmux config
-
