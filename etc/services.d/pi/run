@@ -49,5 +49,5 @@ export HOME
 #     exit 1
 # "
  exec s6-setuidgid "${SLICE_USER}" \
-   /usr/bin/tmux new-session -d -s "${SLICE_USER}" -c "${HOME}" /usr/bin/pi
+   /usr/bin/tmux new-session -d -s pi -c "${HOME}" /usr/bin/pi
 # /usr/bin/sleep infinity
