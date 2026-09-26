@@ -34,6 +34,7 @@ LABEL org.opencontainers.image.license="Liscense"
 # So: use it only if an existing release-age policy is blocking a package you
 # intentionally need right now. Otherwise leave it off.
 #
+ARG PI_VERSION=0.87.1
 # hadolint ignore=DL3016
 RUN apt-get update \
  && apt-get upgrade --yes \
@@ -46,7 +47,7 @@ RUN apt-get update \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* \
  && npm install -g --ignore-scripts --min-release-age=0 \
-    @earendil-works/pi-coding-agent \
+    @earendil-works/pi-coding-agent@${PI_VERSION} \
  && npm install -g --min-release-age=0  pi-web-ui \
  && npm install -g --min-release-age=0 pi-slack-bridge
 
